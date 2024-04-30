@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/cobaDoang/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/cobaDoang/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/cobaDoang/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan3/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan3/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan3/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan4/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan4/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan4/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan5/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan5/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan5/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan6/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan6/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan6/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
