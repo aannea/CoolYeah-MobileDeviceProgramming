@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pertemuan9/bloc/login/login_cubit.dart';
+import 'package:pertemuan9/ui/home_screen.dart';
+import 'package:pertemuan9/ui/phone_auth_screen.dart';
 import '../utils/routes.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,6 +14,23 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailEdc = TextEditingController();
   final passEdc = TextEditingController();
   bool passInvisible = false;
+
+  Future<UserCredential> signInWithGoogle() async {
+    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication gAuth = await
+    gUser!.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: gAuth.accessToken,
+      idToken: gAuth.idToken,
+    );
+    return await
+    FirebaseAuth.instance.signInWithCredential(credential).then(
+            (value) async => await Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+                (route) => false));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +119,41 @@ class _LoginScreenState extends State<LoginScreen> {
             fontWeight: FontWeight.bold, fontSize: 24, color:
         Colors.white
         ),)),
+      const SizedBox(
+        height: 30.0,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              signInWithGoogle();
+            },
+            child: const CircleAvatar(
+              radius: 20.0,
+              backgroundImage: NetworkImage(
+                  'https://img2.pngdownload.id/20190228/qby/kisspng-google-logo-google-account-g-suite-google-images-g-icon-archives-search-png-5c77ad39b77471.9286340315513470017515.jpg'),
+            ),
+          ),
+          const SizedBox(
+            width: 30.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PhoneAuthScreen()));
+            },
+            child: const CircleAvatar(
+              radius: 20.0,
+              backgroundImage: NetworkImage(
+                  'https://freepngimg.com/thumb/business/83615-blue-icons-symbol-telephone-computer-logo.png'),
+            ),
+          )
+        ],
+      ),
+
       SizedBox(height: 25,),
       Row(
           mainAxisAlignment: MainAxisAlignment.center, //Menengahkan elemen horizontal
