@@ -18,6 +18,9 @@
       <excludeFolder url="file://$MODULE_DIR$/pertemuan6/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/pertemuan6/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/pertemuan6/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan9/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan9/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pertemuan9/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
