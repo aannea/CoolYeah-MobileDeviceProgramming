@@ -66,5 +66,4 @@ class DefaultFirebaseOptions {
     projectId: 'prakppbfix',
     storageBucket: 'prakppbfix.appspot.com',
   );
-
 }

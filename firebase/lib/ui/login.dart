@@ -1,11 +1,11 @@
-import 'package:firebase/ui/phone_auth_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase/bloc/login/login_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../utils/routes.dart';
 import 'home_screen.dart';
+import '../ui/phone_auth_screen.dart';
+import 'package:firebase/bloc/login/login_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -21,18 +21,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication gAuth = await
-    gUser!.authentication;
+    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
     final credential = GoogleAuthProvider.credential(
       accessToken: gAuth.accessToken,
       idToken: gAuth.idToken,
     );
-    return await
-    FirebaseAuth.instance.signInWithCredential(credential).then(
-            (value) async => await Navigator.pushAndRemoveUntil(
+    return await FirebaseAuth.instance.signInWithCredential(credential).then(
+          (value) async => await Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen()),
-                (route) => false));
+            (route) => false,
+          ),
+        );
   }
 
   @override
@@ -105,7 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: passEdc,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
-                    icon: Icon(passInvisible ? Icons.visibility : Icons.visibility_off),
+                    icon: Icon(passInvisible
+                        ? Icons.visibility
+                        : Icons.visibility_off),
                     onPressed: () {
                       setState(() {
                         passInvisible = !passInvisible;
@@ -118,7 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
-                  context.read<LoginCubit>().login(email: emailEdc.text, password: passEdc.text);
+                  context
+                      .read<LoginCubit>()
+                      .login(email: emailEdc.text, password: passEdc.text);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xff3D4DE0),
@@ -157,9 +161,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PhoneAuthScreen()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PhoneAuthScreen()),
+                      );
                     },
                     child: const CircleAvatar(
                       radius: 20.0,

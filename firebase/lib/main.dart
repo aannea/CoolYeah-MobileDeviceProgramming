@@ -16,28 +16,29 @@ void main() async {
   );
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
+      providers: [
         BlocProvider(create: (context) => LoginCubit()),
-    BlocProvider(create: (context) => RegisterCubit())
-    ],
-    child: MaterialApp(
-    title: "Praktikum 6",
-    debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: false,
-      ),
-    navigatorKey: NAV_KEY,
-    onGenerateRoute: generateRoute,
-    home:StreamBuilder<User?>(
+        BlocProvider(create: (context) => RegisterCubit())
+      ],
+      child: MaterialApp(
+        title: "Praktikum 6",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: false,
+        ),
+        navigatorKey: NAV_KEY,
+        onGenerateRoute: generateRoute,
+        home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState ==
-                ConnectionState.waiting) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasData) {
               return HomeScreen();
@@ -49,8 +50,8 @@ class MyApp extends StatelessWidget {
               return const LoginScreen();
             }
           },
-    ),
-    ),
+        ),
+      ),
     );
   }
 }

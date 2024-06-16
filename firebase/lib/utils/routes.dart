@@ -4,8 +4,9 @@ import 'package:firebase/ui/login.dart';
 import 'package:firebase/ui/register.dart';
 
 MaterialPageRoute _pageRoute(
-    {required Widget body, required RouteSettings settings}) =>
+        {required Widget body, required RouteSettings settings}) =>
     MaterialPageRoute(builder: (_) => body, settings: settings);
+
 Route? generateRoute(RouteSettings settings) {
   Route? _route;
   final _args = settings.arguments;
@@ -22,6 +23,7 @@ Route? generateRoute(RouteSettings settings) {
   }
   return _route;
 }
+
 final NAV_KEY = GlobalKey<NavigatorState>();
 const String rLogin = '/login';
 const String rRegister = '/register';

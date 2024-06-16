@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
+
 class PhoneAuthScreen extends StatefulWidget {
   @override
   _PhoneAuthScreenState createState() => _PhoneAuthScreenState();
 }
+
 class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
   bool otpVisibility = false;
@@ -26,8 +28,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
     auth.verifyPhoneNumber(
       phoneNumber: "+62" + _phoneController.text,
       timeout: const Duration(seconds: 60),
-      verificationCompleted: (PhoneAuthCredential credential) async
-      {
+      verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential).then((value) {
           print("You are logged in successfully");
         });
@@ -46,25 +47,27 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
 
   void verifyOTP() async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationID, smsCode: _otpController.text);
+      verificationId: verificationID,
+      smsCode: _otpController.text,
+    );
     await auth.signInWithCredential(credential).then(
-          (value) {
+      (value) {
         setState(() {
           user = FirebaseAuth.instance.currentUser;
         });
       },
     ).whenComplete(
-          () {
+      () {
         if (user != null) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(const SnackBar(content: Text('Berhasil Login')));
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-              ),
-            );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          );
         } else {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -74,6 +77,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -85,8 +89,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
               controller: _phoneController,
               decoration: InputDecoration(
                 hintText: 'Masukkan nomor telepon anda',
-                prefix: Padding(padding: EdgeInsets.all(4), child:
-                Text('+62')),
+                prefix: Padding(
+                  padding: EdgeInsets.all(4),
+                  child: Text('+62'),
+                ),
               ),
               keyboardType: TextInputType.phone,
             ),
@@ -95,16 +101,16 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                 controller: _otpController,
                 decoration: InputDecoration(
                   hintText: 'OTP',
-                  prefix: Padding(padding: EdgeInsets.all(4), child:
-                  Text('')),
+                  prefix: Padding(
+                    padding: EdgeInsets.all(4),
+                    child: Text(''),
+                  ),
                 ),
                 keyboardType: TextInputType.number,
               ),
               visible: otpVisibility,
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             MaterialButton(
               color: const Color(0xff3D4DE0),
               onPressed: () {
@@ -116,8 +122,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   }
                 }
               },
-              child: Text(otpVisibility ? "Verify" : "Login",
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              child: Text(
+                otpVisibility ? "Verify" : "Login",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             ),
           ],
         ),
