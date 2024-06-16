@@ -8,6 +8,7 @@ import 'package:firebase/bloc/login/login_cubit.dart';
 import 'package:firebase/utils/routes.dart';
 import 'bloc/register/register_cubit.dart';
 import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
     child: MaterialApp(
     title: "Praktikum 6",
     debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: false,
+      ),
     navigatorKey: NAV_KEY,
     onGenerateRoute: generateRoute,
     home:StreamBuilder<User?>(
